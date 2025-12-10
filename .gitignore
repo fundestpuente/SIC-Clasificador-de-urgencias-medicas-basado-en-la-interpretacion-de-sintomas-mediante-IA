@@ -4,9 +4,6 @@ env/
 __pycache__/
 *.py[cod]
 .ipynb_checkpoints/
-data/*.csv
-data/*.json
-data/*.parquet
 .vscode/
 .DS_Store
 Thumbs.db
