@@ -10,3 +10,6 @@ data/*.parquet
 .vscode/
 .DS_Store
 Thumbs.db
+*.ipynb
+notebooks/1_obtencion_datos.ipynb
+notebooks/prueba_instalacion.ipynb
