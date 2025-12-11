@@ -1,6 +1,6 @@
 # 🏥 SIC: Clasificador de Urgencias Médicas con IA
 
-![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![Python](https://img.shields.io/badge/Python-3.11%2B-blue)
 ![Status](https://img.shields.io/badge/Status-En_Desarrollo-green)
 ![NLP](https://img.shields.io/badge/NLP-Spacy-yellow)
 ![Model](https://img.shields.io/badge/Model-SVM-orange)
