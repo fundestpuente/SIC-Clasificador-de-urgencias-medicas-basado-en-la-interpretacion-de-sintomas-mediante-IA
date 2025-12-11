@@ -7,3 +7,7 @@ __pycache__/
 .vscode/
 .DS_Store
 Thumbs.db
+
+label_encoder_svm.pickle
+tfidf_vectorizer_svm.pickle
+svm_model.pickle
