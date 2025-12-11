@@ -7,7 +7,7 @@
 
 # TrIAje 593
 
-----------------------------------------------------------------------------------------------------------
+---
 
 **TriAje 593** es una herramienta de **triaje médico automatizado** que utiliza Procesamiento de Lenguaje Natural (NLP) e Inteligencia Artificial para analizar descripciones de síntomas y predecir la especialidad médica adecuada (Cardiología, Traumatología, Neurología, etc.).
 
@@ -55,6 +55,8 @@ SIC-Clasificador-Urgencias/
 ├── requirements.txt                # Dependencias del proyecto
 └── README.md                       # Documentación
 
+```
+
 ---
 
 ## 📝 Creditos
@@ -64,5 +66,39 @@ Desarrolladorres:
 - Mateo Steven Mosquera A.
 - Cristian Stiven Pusda H.
 
-## Datos: Basado en el corpus CodiEsp (Plan de Impulso de las Tecnologías del Lenguaje) y MTSamples.
+---
+
+## Datos: 
+Basado en el corpus CodiEsp (Plan de Impulso de las Tecnologías del Lenguaje) y MTSamples.
+
+---
+
+## 🛠️ Instalación y Configuración
+Sigue estos pasos para ejecutar el proyecto en tu máquina local:
+
+1. Clonar el repositorio
+   ```
+   git clone [https://github.com/tu-usuario/sic-clasificador-urgencias.git](https://github.com/tu-usuario/sic-clasificador-urgencias.git)
+   cd sic-clasificador-urgencias
+   ```
+2. Crear un entorno virtual (Recomendado)
+   ```
+    python -m venv venv
+
+   - En Windows:
+   venv\Scripts\activate
+
+   - En Mac/Linux:
+   source venv/bin/activate
+   ```
+3. Instalar dependencias
+   ```
+   pip install -r requirements.txt
+   ```
+4. Descargar el modelo de lenguaje (Spacy)
+   ```
+   python -m spacy download es_core_news_sm
+   ```
+
+
 
