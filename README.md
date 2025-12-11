@@ -32,6 +32,8 @@ El proyecto sigue una arquitectura modular para facilitar la escalabilidad y el 
 
 ```text
 SIC-Clasificador-Urgencias/
+├── app/
+│   ├── app.py/                     # Ejecucion de interfaz web
 ├── data/                           # Almacenamiento de datos
 │   ├── raw/                        # Datos crudos (CodiEsp, MTSamples original)
 │   └── processed/                  # Datos limpios y unificados listos para el modelo
