@@ -11,6 +11,7 @@ import pickle
 import spacy
 import numpy as np
 from datetime import datetime
+import os
 
 # ============================================================
 # CONFIGURACIÓN Y CARGA DE MODELOS
@@ -24,23 +25,56 @@ try:
     print("Modelo de lenguaje español cargado")
 except OSError:
     print("Descargando modelo de lenguaje español...")
-    import os
     os.system("python -m spacy download es_core_news_sm")
     nlp = spacy.load("es_core_news_sm")
 
-# Cargar modelos entrenados
+# Cargar modelos entrenados (prioridad: pipeline -> archivos separados)
+
+
+# Opción 1: Modelos actuales (Pipeline - PRIORIDAD)
+modelo_pipeline = '../models/modelo_triaje_svm.pkl'
+encoder_actual = '../models/label_encoder_final.pkl'
+
+# Opción 2: Modelos de la celda 4 del notebook (archivos separados)
+modelo_separado = '../models/svm_model.pickle'
+vectorizador_separado = '../models/tfidf_vectorizer.pickle'
+encoder_separado = '../models/label_encoder_svm.pickle'
+
 try:
-    with open('../models/modelo_triaje_svm.pkl', 'rb') as f:
-        svm_model = pickle.load(f)
+    # Intentar cargar pipeline primero (PRIORIDAD)
+    if os.path.exists(modelo_pipeline) and os.path.exists(encoder_actual):
+        with open(modelo_pipeline, 'rb') as f:
+            svm_model = pickle.load(f)
+        
+        with open(encoder_actual, 'rb') as f:
+            label_encoder = pickle.load(f)
+        
+        print("Modelos cargados: Pipeline (modelo_triaje_svm.pkl)")
+        usar_pipeline = True
     
-    with open('../models/label_encoder_final.pkl', 'rb') as f:
-        label_encoder = pickle.load(f)
+    # Fallback: Cargar modelos separados de la celda 4
+    elif os.path.exists(modelo_separado) and os.path.exists(vectorizador_separado) and os.path.exists(encoder_separado):
+        with open(modelo_separado, 'rb') as f:
+            svm_model = pickle.load(f)
+        
+        with open(vectorizador_separado, 'rb') as f:
+            tfidf_vectorizer = pickle.load(f)
+        
+        with open(encoder_separado, 'rb') as f:
+            label_encoder = pickle.load(f)
+        
+        print("Modelos cargados: Archivos separados (celda 4 del notebook)")
+        usar_pipeline = False
     
-    print("Modelos SVM cargados correctamente")
+    else:
+        raise FileNotFoundError("No se encontraron modelos entrenados")
+
 except FileNotFoundError as e:
     print("\nERROR: No se encontraron los modelos entrenados")
-    print("Por favor, ejecuta primero: python train_svm.py")
-    print(f"   Archivo faltante: {e.filename}")
+    print("\nOpciones para generar los modelos:")
+    print("1. Ejecutar notebook: notebooks/3_entrenamiento_modelos.ipynb (celdas 1-3)")
+    print("2. Ejecutar script: python src/train.py")
+    print(f"\nArchivo faltante: {e}")
     exit(1)
 
 # Configuración de negaciones (importantes en contexto médico)
@@ -233,12 +267,17 @@ def predecir_especialidad(sintomas_usuario):
     if not texto_procesado or len(texto_procesado.split()) < 2:
         return "No pude entender tus síntomas. Por favor, describe con más detalle qué sientes."
     
-    # Vectorización
-    texto_vectorizado = tfidf.transform([texto_procesado]).toarray()
+    # Predicción según el tipo de modelo cargado
+    if usar_pipeline:
+        # Pipeline: vectorización + clasificación en un solo paso
+        prediccion_index = svm_model.predict([texto_procesado])[0]
+        probabilidades = svm_model.predict_proba([texto_procesado])[0]
+    else:
+        # Modelos separados: vectorizar primero, luego clasificar
+        texto_vectorizado = tfidf_vectorizer.transform([texto_procesado]).toarray()
+        prediccion_index = svm_model.predict(texto_vectorizado)[0]
+        probabilidades = svm_model.predict_proba(texto_vectorizado)[0]
     
-    # Predicción
-    prediccion_index = svm_model.predict(texto_vectorizado)[0]
-    probabilidades = svm_model.predict_proba(texto_vectorizado)[0]
     confianza = np.max(probabilidades) * 100
     
     # Decodificar especialidad
