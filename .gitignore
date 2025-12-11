@@ -8,6 +8,6 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
-label_encoder_svm.pickle
-tfidf_vectorizer_svm.pickle
-svm_model.pickle
+# Archivos de modelos grandes (generados localmente)
+models/*.pickle
+*.pickle
