@@ -7,6 +7,9 @@ __pycache__/
 .vscode/
 .DS_Store
 Thumbs.db
-*.ipynb
-notebooks/1_obtencion_datos.ipynb
-notebooks/prueba_instalacion.ipynb
+
+# Modelos entrenados para la visualización (se generan ejecutando el código)
+models/svm_model.pickle
+models/tfidf_vectorizer.pickle
+models/label_encoder_svm.pickle
+
