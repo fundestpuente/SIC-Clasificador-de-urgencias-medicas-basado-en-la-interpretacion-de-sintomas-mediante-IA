@@ -9,7 +9,4 @@ __pycache__/
 Thumbs.db
 
 # Modelos entrenados para la visualización (se generan ejecutando el código)
-models/svm_model.pickle
-models/tfidf_vectorizer.pickle
-models/label_encoder_svm.pickle
 
