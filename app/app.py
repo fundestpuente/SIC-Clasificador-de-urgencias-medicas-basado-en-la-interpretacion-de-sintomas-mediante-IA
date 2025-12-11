@@ -30,13 +30,10 @@ except OSError:
 
 # Cargar modelos entrenados
 try:
-    with open('../models/svm_model.pickle', 'rb') as f:
+    with open('../models/modelo_triaje_svm.pkl', 'rb') as f:
         svm_model = pickle.load(f)
     
-    with open('../models/tfidf_vectorizer.pickle', 'rb') as f:
-        tfidf = pickle.load(f)
-    
-    with open('../models/label_encoder_svm.pickle', 'rb') as f:
+    with open('../models/label_encoder_final.pkl', 'rb') as f:
         label_encoder = pickle.load(f)
     
     print("Modelos SVM cargados correctamente")
