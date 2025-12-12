@@ -41,7 +41,7 @@ vectorizador_separado = '../models/tfidf_vectorizer.pickle'
 encoder_separado = '../models/label_encoder_svm.pickle'
 
 try:
-    # Intentar cargar pipeline primero (PRIORIDAD)
+    # Intentar cargar modelos .pipeline primero (PRIORIDAD para comparación)
     if os.path.exists(modelo_pipeline) and os.path.exists(encoder_actual):
         with open(modelo_pipeline, 'rb') as f:
             svm_model = pickle.load(f)
@@ -49,10 +49,11 @@ try:
         with open(encoder_actual, 'rb') as f:
             label_encoder = pickle.load(f)
         
-        print("Modelos cargados: Pipeline (modelo_triaje_svm.pkl)")
+        print("Modelos cargados: Pipeline .pkl (modelo_triaje_svm.pkl)")
         usar_pipeline = True
     
-    # Fallback: Cargar modelos separados de la celda 4
+    
+    # Fallback: Cargar modelos separados (.pickle)
     elif os.path.exists(modelo_separado) and os.path.exists(vectorizador_separado) and os.path.exists(encoder_separado):
         with open(modelo_separado, 'rb') as f:
             svm_model = pickle.load(f)
@@ -63,7 +64,7 @@ try:
         with open(encoder_separado, 'rb') as f:
             label_encoder = pickle.load(f)
         
-        print("Modelos cargados: Archivos separados (celda 4 del notebook)")
+        print("Modelos cargados: Archivos .pickle (celda 4 del notebook)")
         usar_pipeline = False
     
     else:
@@ -380,13 +381,13 @@ No te automediques
 # Ejemplos predefinidos para guiar al usuario
 ejemplos = [
     "Tengo un dolor muy fuerte en el pecho que se irradia al brazo izquierdo y me cuesta respirar",
-    "Me salió una mancha roja en la piel que me pica muchísimo y está creciendo",
     "Tengo visión borrosa en el ojo derecho y me duele la cabeza del mismo lado",
-    "Me caí y creo que me fracturé la pierna, está muy hinchada y no puedo apoyarla",
-    "Siento ardor al orinar y dolor en la espalda baja cerca de los riñones",
-    "Llevo tres días con vómitos constantes, fiebre y dolor abdominal intenso",
-    "Tengo mareos muy fuertes, me duele la cabeza y siento náuseas",
-    "Me siento muy ansioso, tengo palpitaciones y no puedo dormir desde hace semanas"
+    "Me caí y me duele mucho la pierna, está muy hinchada y no puedo apoyarla",
+    "He tenido náuseas y vómitos constantes"
+    "Me siento muy ansioso, tengo palpitaciones y no puedo dormir desde hace semanas",
+    "He tenido mucho sangrado vaginal",
+    "he tenido mucha pérdida de peso",
+    "he tenido problemas para dormir y pensamientos intrusivos"
 ]
 
 # Crear interfaz de chatbot

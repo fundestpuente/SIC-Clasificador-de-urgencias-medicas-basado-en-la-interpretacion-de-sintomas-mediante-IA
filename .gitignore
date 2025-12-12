@@ -10,4 +10,3 @@ Thumbs.db
 
 # Archivos de modelos grandes (generados localmente)
 models/*.pickle
-*.pickle
