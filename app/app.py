@@ -382,8 +382,8 @@ No te automediques
 ejemplos = [
     "Tengo un dolor muy fuerte en el pecho que se irradia al brazo izquierdo y me cuesta respirar",
     "Tengo visión borrosa en el ojo derecho y me duele la cabeza del mismo lado",
-    "Me caí y me duele mucho la pierna, está muy hinchada y no puedo apoyarla",
-    "He tenido náuseas y vómitos constantes"
+    "Me caí y tengo mucho dolor en la pierna",
+    "He tenido náuseas y vómitos constantes",
     "Me siento muy ansioso, tengo palpitaciones y no puedo dormir desde hace semanas",
     "He tenido mucho sangrado vaginal",
     "he tenido mucha pérdida de peso",
