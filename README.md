@@ -44,9 +44,9 @@ SIC-Clasificador-Urgencias/
 │   └── label_encoder_final.pickle  # Diccionario de traducción (Número -> Especialidad)
 │
 ├── notebooks/                      # Laboratorio de experimentación
-│   ├── 1.0-obtencion-datos.ipynb   # Descarga, traducción y unificación
-│   ├── 2.0-preprocesamiento.ipynb  # Limpieza NLP y codificación
-│   └── 3.0-entrenamiento.ipynb     # Entrenamiento, evaluación y análisis de errores
+│   ├── 1_obtencion_datos.ipynb     # Descarga CodiEsp, carga MTSamples y unificación
+│   ├── 2_preprocesamiento_nlp.ipynb # Limpieza NLP y codificación
+│   └── 3_entrenamiento_modelos.ipynb # Entrenamiento, evaluación y análisis de errores
 │
 ├── src/                            # Código Fuente (Producción)
 │   ├── config.py                   # Configuración centralizada (Rutas, Hiperparámetros)

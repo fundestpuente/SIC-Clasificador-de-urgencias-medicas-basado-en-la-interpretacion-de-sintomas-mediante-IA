@@ -41,8 +41,20 @@ vectorizador_separado = '../models/tfidf_vectorizer.pickle'
 encoder_separado = '../models/label_encoder_svm.pickle'
 
 try:
-    # Intentar cargar modelos .pickle primero (PRIORIDAD para comparación)
-    if os.path.exists(modelo_separado) and os.path.exists(vectorizador_separado) and os.path.exists(encoder_separado):
+    # Intentar cargar modelos .pipeline primero (PRIORIDAD para comparación)
+    if os.path.exists(modelo_pipeline) and os.path.exists(encoder_actual):
+        with open(modelo_pipeline, 'rb') as f:
+            svm_model = pickle.load(f)
+        
+        with open(encoder_actual, 'rb') as f:
+            label_encoder = pickle.load(f)
+        
+        print("Modelos cargados: Pipeline .pkl (modelo_triaje_svm.pkl)")
+        usar_pipeline = True
+    
+    
+    # Fallback: Cargar modelos separados (.pickle)
+    elif os.path.exists(modelo_separado) and os.path.exists(vectorizador_separado) and os.path.exists(encoder_separado):
         with open(modelo_separado, 'rb') as f:
             svm_model = pickle.load(f)
         
@@ -54,17 +66,6 @@ try:
         
         print("Modelos cargados: Archivos .pickle (celda 4 del notebook)")
         usar_pipeline = False
-    
-    # Fallback: Cargar pipeline
-    elif os.path.exists(modelo_pipeline) and os.path.exists(encoder_actual):
-        with open(modelo_pipeline, 'rb') as f:
-            svm_model = pickle.load(f)
-        
-        with open(encoder_actual, 'rb') as f:
-            label_encoder = pickle.load(f)
-        
-        print("Modelos cargados: Pipeline .pkl (modelo_triaje_svm.pkl)")
-        usar_pipeline = True
     
     else:
         raise FileNotFoundError("No se encontraron modelos entrenados")
@@ -469,7 +470,7 @@ if __name__ == "__main__":
     
     demo.launch(
         server_name="127.0.0.1",
-        server_port=7861,
+        server_port=7860,
         share=False,  # Cambia a True si quieres compartir públicamente
         show_error=True,
         theme=gr.themes.Soft()  # En Gradio 6.0, theme va en launch()
