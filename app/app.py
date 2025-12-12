@@ -41,19 +41,8 @@ vectorizador_separado = '../models/tfidf_vectorizer.pickle'
 encoder_separado = '../models/label_encoder_svm.pickle'
 
 try:
-    # Intentar cargar pipeline primero (PRIORIDAD)
-    if os.path.exists(modelo_pipeline) and os.path.exists(encoder_actual):
-        with open(modelo_pipeline, 'rb') as f:
-            svm_model = pickle.load(f)
-        
-        with open(encoder_actual, 'rb') as f:
-            label_encoder = pickle.load(f)
-        
-        print("Modelos cargados: Pipeline (modelo_triaje_svm.pkl)")
-        usar_pipeline = True
-    
-    # Fallback: Cargar modelos separados de la celda 4
-    elif os.path.exists(modelo_separado) and os.path.exists(vectorizador_separado) and os.path.exists(encoder_separado):
+    # Intentar cargar modelos .pickle primero (PRIORIDAD para comparación)
+    if os.path.exists(modelo_separado) and os.path.exists(vectorizador_separado) and os.path.exists(encoder_separado):
         with open(modelo_separado, 'rb') as f:
             svm_model = pickle.load(f)
         
@@ -63,8 +52,19 @@ try:
         with open(encoder_separado, 'rb') as f:
             label_encoder = pickle.load(f)
         
-        print("Modelos cargados: Archivos separados (celda 4 del notebook)")
+        print("Modelos cargados: Archivos .pickle (celda 4 del notebook)")
         usar_pipeline = False
+    
+    # Fallback: Cargar pipeline
+    elif os.path.exists(modelo_pipeline) and os.path.exists(encoder_actual):
+        with open(modelo_pipeline, 'rb') as f:
+            svm_model = pickle.load(f)
+        
+        with open(encoder_actual, 'rb') as f:
+            label_encoder = pickle.load(f)
+        
+        print("Modelos cargados: Pipeline .pkl (modelo_triaje_svm.pkl)")
+        usar_pipeline = True
     
     else:
         raise FileNotFoundError("No se encontraron modelos entrenados")
@@ -465,11 +465,11 @@ if __name__ == "__main__":
     print(" LANZANDO INTERFAZ WEB DEL CLASIFICADOR MÉDICO")
     print("="*60)
     print("La aplicación se abrirá en tu navegador automáticamente")
-    print(" URL local: http://127.0.0.1:7860")
+    print(" URL local: http://127.0.0.1:7861")
     
     demo.launch(
         server_name="127.0.0.1",
-        server_port=7860,
+        server_port=7861,
         share=False,  # Cambia a True si quieres compartir públicamente
         show_error=True,
         theme=gr.themes.Soft()  # En Gradio 6.0, theme va en launch()

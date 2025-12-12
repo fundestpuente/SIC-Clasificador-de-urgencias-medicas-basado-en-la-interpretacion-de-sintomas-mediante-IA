@@ -9,5 +9,5 @@ __pycache__/
 Thumbs.db
 
 # Archivos de modelos grandes (generados localmente)
-models/*.pickle
+models/*.pkl
 *.pickle

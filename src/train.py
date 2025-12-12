@@ -103,7 +103,7 @@ def train():
     ])
 
     # 6. Entrenamiento
-    print("🧠 Entrenando modelo SVM (esto puede tardar unos segundos)...")
+    print("🧠 Entrenando modelo SVM (esto puede tardar unos minutos)...")
     pipeline.fit(X_train, y_train)
     
     # 7. Evaluación rápida
