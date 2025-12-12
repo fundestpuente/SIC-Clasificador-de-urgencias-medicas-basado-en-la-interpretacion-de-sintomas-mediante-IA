@@ -21,7 +21,7 @@ MTSAMPLES_TRANSLATED_FILE = os.path.join(RAW_DATA_DIR, 'mtsamples_translated.csv
 # Archivo unificado (CodiEsp + MTSamples)
 UNIFIED_DATA_FILE = os.path.join(PROCESSED_DATA_DIR, 'datos_triaje_unificados.csv')
 # Archivo final limpio listo para entrenar (NLP procesado)
-PROCESSED_DATA_FILE = os.path.join(PROCESSED_DATA_DIR, 'datos_nlp_procesados_aumentados.csv')
+PROCESSED_DATA_FILE = os.path.join(PROCESSED_DATA_DIR, 'datos_nlp_procesados.csv')
 
 # Archivos de Modelos (Artefactos)
 # El modelo SVM entrenado (Pipeline)
