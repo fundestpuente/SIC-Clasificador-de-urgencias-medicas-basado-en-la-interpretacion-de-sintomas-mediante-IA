@@ -471,7 +471,7 @@ if __name__ == "__main__":
     demo.launch(
         server_name="127.0.0.1",
         server_port=7860,
-        share=False,  # Cambia a True si quieres compartir públicamente
+        share=False, 
         show_error=True,
-        theme=gr.themes.Soft()  # En Gradio 6.0, theme va en launch()
+        theme=gr.themes.Soft()  # 
     )
