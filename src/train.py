@@ -30,20 +30,10 @@ def unificar_categorias(especialidad):
         return 'TRAUMATOLOGÍA/MUSCULAR'
     
     # 2. Agrupar clases muy pequeñas para evitar ruido (Precisión 0.00)
-    clases_minoritarias = [
-        'RESPIRATORIO/NEUMOLOGÍA', 
-        'TOXICOLOGÍA', 
-        'TOXICOLOGÍA/LESIONES',
-        'INFECCIOSAS/PARASITARIAS', 
-        'SANGRE/INMUNOLOGÍA', 
-        'OTROS',
-        'DERMATOLOGÍA',
-        'ENDOCRINOLOGÍA/NUTRICIÓN',
-        'PSIQUIATRÍA/MENTAL'
-    ]
+    clases_minoritarias = [ ]
     
     if especialidad in clases_minoritarias:
-        return 'CONSULTA GENERAL/OTROS'
+        return 'MEDICINA GENERAL'
         
     return especialidad
 
